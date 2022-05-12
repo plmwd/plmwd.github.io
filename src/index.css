@@ -15,3 +15,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.nav-items {}
+@layer utilities {
+  .nav-items .active {
+    @apply bg-pale-cerulean text-dark-gunmetal
+  }
+  .nav-items > a {
+    @apply bg-dark-gunmetal text-lavendar
+  }
+}
