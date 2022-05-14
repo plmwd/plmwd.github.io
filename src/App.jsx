@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import CommandLine from "./components/CommandLine";
 import VimBar from "./components/VimBar";
-import { initModeManager, useMode } from "./modes";
+import { useVim } from "./vim";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -37,10 +37,9 @@ const navs = [
 ];
 
 addShortcut("gt", () => console.log("calling gt"))
-initModeManager()
 
 function App() {
-  useMode()
+  useVim()
 
   return (
     <div className="h-full w-full">

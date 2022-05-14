@@ -30,7 +30,8 @@ function startTimer() {
   }, TIMEOUT);
 }
 
-function tryNextKey(key) {
+export function tryNextKey(key) {
+  console.log(key)
   curKeys += key;
   let keyNode = curNode.keys.get(key);
 
@@ -54,16 +55,16 @@ function keypressListener(event) {
   tryNextKey(event.key);
 }
 
-export function shortcutsListen() {
-  console.log('listen')
-  addEventListener("keypress", keypressListener);
-}
-
-export function shortcutsIgnore() {
-  console.log('ignore')
-  if (timer) clearTimeout(timer);
-  removeEventListener("keypress", keypressListener);
-}
+// export function shortcutsListen() {
+//   console.log('listen')
+//   addEventListener("keypress", keypressListener);
+// }
+//
+// export function shortcutsIgnore() {
+//   console.log('ignore')
+//   if (timer) clearTimeout(timer);
+//   removeEventListener("keypress", keypressListener);
+// }
 
 export function addShortcut(keys, callback) {
   let node = shortcuts;
