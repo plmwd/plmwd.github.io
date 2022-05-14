@@ -29,12 +29,13 @@ export function useVim() {
     addEventListener("keypress", (event) => {
       const mode = modeRef.current
       const command = commandRef.current
-      console.log(mode, command);
+      console.log(event, mode, command);
       switch (event.key) {
         case ":":
           if (mode === "normal") {
             setMode("command");
-            setCommand(":");
+            setCommand(":")
+            // setCommand(":");
           }
           break;
 
@@ -56,6 +57,9 @@ export function useVim() {
         case "Backspace":
           if (mode === "command") {
             setCommand(command.slice(0, -1))
+            if (command.length === 1) {
+              setMode("normal")
+            }
           }
           break;
 

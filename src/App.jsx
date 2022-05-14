@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Posts from "./pages/Posts";
 import { addShortcut } from "./shortcuts";
+import Sidebar from "./components/Sidebar";
 
 const navs = [
   {
@@ -36,21 +37,31 @@ const navs = [
   },
 ];
 
-addShortcut("gt", () => console.log("calling gt"))
-
+addShortcut("gt", () => console.log("calling gt"));
 function App() {
-  useVim()
+  useVim();
 
   return (
-    <div className="h-full w-full">
-      <VimBar navs={navs} />
-      <div className="main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="posts" element={<Posts />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+    <div className="h-screen w-screen bg-gray-200">
+      <div className="flex flex-row">
+        <div className="h-screen basis-3/12">
+          <Sidebar
+            items={[
+              { name: "one", href: "about" },
+              "two",
+              { items: ["four", "five"], name: "three" },
+            ]}
+          />
+        </div>
+        <div className="flex-auto">
+          <VimBar navs={navs} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="posts" element={<Posts />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       </div>
       <div className="bottom-0 fixed w-screen">
         <CommandLine />

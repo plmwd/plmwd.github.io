@@ -19,7 +19,7 @@ code {
 .nav-items {}
 @layer utilities {
   .nav-items .active {
-    @apply bg-pale-cerulean text-dark-gunmetal
+    @apply bg-pale-cerulean text-dark-gunmetal font-bold tracking-tighter
   }
   .nav-items > a {
     @apply bg-dark-gunmetal text-lavendar
