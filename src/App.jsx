@@ -3,67 +3,70 @@ import "./App.css";
 import CommandLine from "./components/CommandLine";
 import VimBar from "./components/VimBar";
 import { useVim } from "./vim";
+import { addShortcut } from "./shortcuts";
+import Sidebar from "./components/Sidebar";
+import StatusLine from "./components/StatusLine";
+import { useState } from "react";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Posts from "./pages/Posts";
-import { addShortcut } from "./shortcuts";
-import Sidebar from "./components/Sidebar";
+import Projects from "./pages/Projects";
 
 const navs = [
-  {
-    name: "PW",
-    to: "/",
-  },
+  // {
+  //   name: "PW",
+  //   to: "/",
+  // },
   {
     name: "About",
-    to: "about",
+    to: "/",
   },
-  {
-    name: "Experience",
-    to: "experience",
-  },
+  // {
+  //   name: "Experience",
+  //   to: "experience",
+  // },
   {
     name: "Projects",
     to: "projects",
   },
-  // {
-  //   name: "Blog",
-  //   to: "posts",
-  // },
   {
-    name: "Contact",
-    to: "contact",
+    name: "Blog",
+    to: "posts",
   },
+  // {
+  //   name: "Contact",
+  //   to: "contact",
+  // },
 ];
 
 addShortcut("gt", () => console.log("calling gt"));
 function App() {
+  const [items, setItems] = useState([]);
   useVim();
 
   return (
-    <div className="h-screen w-screen bg-gray-200">
-      <div className="flex flex-row">
-        <div className="h-screen basis-3/12">
-          <Sidebar
-            items={[
-              { name: "one", href: "about" },
-              "two",
-              { items: ["four", "five"], name: "three" },
-            ]}
-          />
+    <div className="h-screen w-screen bg-gray-200 flex flex-col">
+      <div className="h-6">
+        <VimBar navs={navs} />
+      </div>
+      <div className="flex flex-row h-full">
+        <div className="w-52">
+          <Sidebar items={items} />
         </div>
         <div className="flex-auto">
-          <VimBar navs={navs} />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="about" element={<About />} />
-            <Route path="posts" element={<Posts />} />
+            <Route path="/" element={<About setItems={setItems} />} />
+            <Route path="posts" element={<Posts setItems={setItems}/>} />
+            <Route path="projects" element={<Projects setItems={setItems}/>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
       </div>
-      <div className="bottom-0 fixed w-screen">
+      <div className="h-5">
+        <StatusLine />
+      </div>
+      <div className="h-5">
         <CommandLine />
       </div>
     </div>
