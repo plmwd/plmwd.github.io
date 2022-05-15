@@ -41,24 +41,41 @@ const navs = [
 ];
 
 addShortcut("gt", () => console.log("calling gt"));
+
 function App() {
   const [items, setItems] = useState([]);
+  const [title, setTitle] = useState("");
   useVim();
 
   return (
     <div className="h-screen w-screen bg-gray-200 flex flex-col">
-      <div className="h-6">
+      <div className="h-12 flex flex-row bg-gray-400 items-stretch">
+        {/* <div className="flex items-center h-full px-3 mx-3 rounded-sm -skew-x-12 bg-gray-300"> */}
+        <div className="flex items-center after:rounded-sm rounded-sm px-3 mr-2 my-2 bg-gray-300 ring-2 ring-magenta-500 ring-offset-2 ring-offset-gray-400 after:bg-gray-300 ml-2">
+          <a className="font-mono tracking-[0.3em] text-white-400 font-black text-lg">
+            PW
+          </a>
+        </div>
         <VimBar navs={navs} />
       </div>
       <div className="flex flex-row h-full">
         <div className="w-52">
-          <Sidebar items={items} />
+          <Sidebar title={title} items={items} />
         </div>
         <div className="flex-auto">
           <Routes>
-            <Route path="/" element={<About setItems={setItems} />} />
-            <Route path="posts" element={<Posts setItems={setItems}/>} />
-            <Route path="projects" element={<Projects setItems={setItems}/>} />
+            <Route
+              path="/"
+              element={<About setTitle={setTitle} setItems={setItems} />}
+            />
+            <Route
+              path="posts"
+              element={<Posts setTitle={setTitle} setItems={setItems} />}
+            />
+            <Route
+              path="projects"
+              element={<Projects setTitle={setTitle} setItems={setItems} />}
+            />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
