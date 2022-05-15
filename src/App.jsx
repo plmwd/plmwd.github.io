@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import CommandLine from "./components/CommandLine";
 import VimBar from "./components/VimBar";
@@ -46,13 +46,16 @@ function App() {
   const [items, setItems] = useState([]);
   const [title, setTitle] = useState("");
   useVim();
+  const navigate = useNavigate()
 
   return (
     <div className="h-screen w-screen bg-gray-200 flex flex-col">
       <div className="h-12 flex flex-row bg-gray-400 items-stretch">
-        {/* <div className="flex items-center h-full px-3 mx-3 rounded-sm -skew-x-12 bg-gray-300"> */}
-        <div className="flex items-center after:rounded-sm rounded-sm px-3 mr-2 my-2 bg-gray-300 ring-2 ring-magenta-500 ring-offset-2 ring-offset-gray-400 after:bg-gray-300 ml-2">
-          <a className="font-mono tracking-[0.3em] text-white-400 font-black text-lg">
+        <div 
+          className="flex items-center after:rounded-sm rounded-sm px-3 mr-2 my-2 bg-gray-300 ring-2 ring-magenta-500 ring-offset-2 ring-offset-gray-400 after:bg-gray-300 ml-2 hover:cursor-pointer hover:bg-magenta-400 hover:after:bg-magenta-400"
+          onClick={() => navigate("/")}
+        >
+          <a className="font-mono tracking-[0.3em] text-white-400 font-black text-lg hover:text-gray-300">
             PW
           </a>
         </div>
