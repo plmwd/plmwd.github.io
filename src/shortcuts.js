@@ -57,9 +57,17 @@ function addShortcut(keys, callback) {
   let node = shortcuts;
   for (let i = 0; i < keys.length; i++) {
     let k = keys[i];
+    console.log(k, i);
     if (node.keys.has(k)) {
       node = node.keys.get(k);
-    } else {
+
+      if (i === keys.length - 1) {
+        // console.log("resetting callback");
+        node.callback = callback
+      }
+    } 
+    else {
+      // console.log("creating node");
       let newNode = new ShortcutNode(k);
       if (i === keys.length - 1) {
         newNode.callback = callback;
@@ -67,6 +75,7 @@ function addShortcut(keys, callback) {
       node.keys.set(k, newNode);
       node = newNode;
     }
+    console.log(k, node);
   }
 }
 
@@ -74,5 +83,5 @@ export function useShortcut(keys, callback) {
   useEffect(() => {
     addShortcut(keys, callback);
     // TODO: remove shortcut
-  }, []);
+  }, [keys, callback]);
 }
