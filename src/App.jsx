@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound";
 import Posts from "./pages/Posts";
 import Projects from "./pages/Projects";
 import { useShortcut } from "./shortcuts";
+import { useCommand } from "./commands";
 import { useVim } from "./vim";
 
 const navs = [
@@ -59,7 +60,12 @@ function App() {
   }, [location.pathname, navigate]);
 
   useShortcut("gt", nextTab);
+  useShortcut("n", nextTab);
+  useCommand("tabnext", nextTab);
+
+  useShortcut("p", prevTab);
   useShortcut("gT", prevTab);
+  useCommand("tabprev", prevTab);
 
   return (
     <div className="h-screen w-screen bg-gray-200 flex flex-col">

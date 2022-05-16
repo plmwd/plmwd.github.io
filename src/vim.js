@@ -44,7 +44,7 @@ export function useVim() {
 
         case "Enter":
           if (mode === "command") {
-            executeCommand(command);
+            executeCommand(command.slice(1));
             setMode("normal");
             setCommand("");
           }

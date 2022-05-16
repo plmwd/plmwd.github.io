@@ -1,4 +1,19 @@
+import { useEffect } from "react";
+
+let commands = new Map();
 
 export function executeCommand(command) {
-  console.log("executing command: ", command)
+  const cmd = commands.get(command);
+  if (cmd) {
+    cmd()
+  }
+  else {
+    console.error("Invalid command:", command);
+  }
+}
+
+export function useCommand(command, callback) {
+  useEffect(() => {
+    commands.set(command, callback);
+  }, [command, callback]);
 }
