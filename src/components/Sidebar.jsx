@@ -31,7 +31,7 @@ export default function Sidebar({ title, items }) {
           compiled.push({
             level: 1,
             name: subItem.name || subItem,
-            href: subItem.href,
+            href: subItem.href || `#${item.name}-${subItem.name || subItem}`,
             icon: subItem.icon || <VscFile />,
             color: subItem.color || "white-400",
           });
@@ -40,7 +40,7 @@ export default function Sidebar({ title, items }) {
         compiled.push({
           level: 0,
           name: item.name || item,
-          href: item.href,
+          href: item.href || `#${item.name || item}`,
           icon: item.icon || <VscFile />,
           color: item.color || "white-400",
         });

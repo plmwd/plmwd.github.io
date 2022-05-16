@@ -1,6 +1,4 @@
-// This assumes that there are no input fields anywhere lol
-
-import { useMemo } from "react";
+import { useEffect } from "react";
 
 class ShortcutNode {
   constructor(key = null) {
@@ -31,47 +29,36 @@ function startTimer() {
 }
 
 export function tryNextKey(key) {
-  console.log(key)
   curKeys += key;
+  console.log(curKeys, key)
   let keyNode = curNode.keys.get(key);
 
   if (keyNode == undefined || keyNode.key !== key) {
     console.error("Wrong shortcut:", curKeys);
+    let oldKeys = curKeys;
     resetState();
-    return;
+    return oldKeys;
   }
 
   if (keyNode.callback) {
     keyNode.callback();
+    let oldKeys = curKeys;
     resetState();
-  } else {
-    curNode = curNode.keys.get(key);
-    if (timer) clearTimeout(timer);
-    startTimer();
+    return oldKeys;
   }
+
+  curNode = curNode.keys.get(key);
+  if (timer) clearTimeout(timer);
+  startTimer();
+  return curKeys;
 }
 
-function keypressListener(event) {
-  tryNextKey(event.key);
-}
-
-// export function shortcutsListen() {
-//   console.log('listen')
-//   addEventListener("keypress", keypressListener);
-// }
-//
-// export function shortcutsIgnore() {
-//   console.log('ignore')
-//   if (timer) clearTimeout(timer);
-//   removeEventListener("keypress", keypressListener);
-// }
-
-export function addShortcut(keys, callback) {
+function addShortcut(keys, callback) {
   let node = shortcuts;
   for (let i = 0; i < keys.length; i++) {
     let k = keys[i];
     if (node.keys.has(k)) {
-      node = node.get(k);
+      node = node.keys.get(k);
     } else {
       let newNode = new ShortcutNode(k);
       if (i === keys.length - 1) {
@@ -84,6 +71,8 @@ export function addShortcut(keys, callback) {
 }
 
 export function useShortcut(keys, callback) {
-  useMemo(() => addShortcut(keys, callback), [keys, callback]);
-  return curKeys;
+  useEffect(() => {
+    addShortcut(keys, callback);
+    // TODO: remove shortcut
+  }, []);
 }

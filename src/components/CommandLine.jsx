@@ -1,11 +1,12 @@
 import { useVim } from "../vim";
 
 export default function CommandLine() {
-  const { command } = useVim();
+  const { command, keys } = useVim();
 
   return (
-    <div className="w-full bg-dark-gunmetal text-lavendar text-mono h-full px-3">
-      <p>{command}</p>
+    <div className="flex w-full bg-dark-gunmetal text-lavendar font-mono h-full px-3 align-middle justify-between text-sm">
+      <p className="align-middle">{command}</p>
+      <p className="align-middle">{keys}</p>
     </div>
   );
 }

@@ -2,13 +2,19 @@ import { useEffect } from "react"
 
 export default function About({ setTitle, setItems }) {
   useEffect(() => {
-    setTitle("~/About/")
+    setTitle("~/About.md")
     setItems([
-      { name: "one", href: "about" },
+      "one",
       "two",
       { items: ["four", "five"], name: "three" },
     ])
   }, [])
 
-  return <p>About</p>
+  return (
+    <div className="flex flex-row">
+      <div>
+
+      </div>
+    </div>
+  )
 }
