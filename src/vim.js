@@ -1,78 +1,73 @@
-import { useEffect, useRef } from "react";
-import { executeCommand } from "./commands";
-import { atom, useAtom } from "jotai";
-import { tryNextKey } from "./shortcuts";
+import { atom, useAtomValue } from "jotai";
+import { useAtomCallback } from "jotai/utils";
+import { useCallback, useEffect } from "react";
+import {
+    commandAtom, useExecuteCommand, useResetCommand, useUpdateCommand
+} from "./commands";
+import { keysAtom, useUpdateShortcuts } from "./shortcuts";
 
 let modeAtom = atom("normal");
-let commandAtom = atom("");
-let keysAtom = atom("");
 let initialized = false;
 
-function useRefAtom(atom) {
-  const [val, _setVal] = useAtom(atom);
-  const valRef = useRef(val);
-  return [
-    val,
-    valRef,
-    (newVal) => {
-      valRef.current = newVal;
-      _setVal(newVal);
-    },
-  ];
-}
-
 export function useVim() {
-  const [mode, modeRef, setMode] = useRefAtom(modeAtom);
-  const [command, commandRef, setCommand] = useRefAtom(commandAtom);
-  const [keys, keysRef, setKeys] = useRefAtom(keysAtom);
+  const command = useAtomValue(commandAtom);
+  const keys = useAtomValue(keysAtom);
+  const updateCommand = useUpdateCommand();
+  const resetCommand = useResetCommand();
+  const executeCommand = useExecuteCommand();
+  const updateShortcuts = useUpdateShortcuts();
+  const mode = useAtomValue(modeAtom);
 
-  useEffect(() => {
-    if (initialized) return;
-
-    addEventListener("keypress", (event) => {
-      const mode = modeRef.current;
-      const command = commandRef.current;
+  const updateMode = useAtomCallback(
+    useCallback((get, set, key) => {
+      const mode = get(modeAtom);
       console.log(event, mode, command);
-      switch (event.key) {
+      switch (key) {
         case ":":
           if (mode === "normal") {
-            setMode("command");
-            setCommand(":");
-            // setCommand(":");
+            set(modeAtom, "command");
+            updateCommand(":");
           }
           break;
 
         case "Enter":
           if (mode === "command") {
-            executeCommand(command.slice(1));
-            setMode("normal");
-            setCommand("");
+            executeCommand();
+            set(modeAtom, "normal");
           }
           break;
 
         case "Escape":
           if (mode === "command") {
-            setMode("normal");
-            setCommand("");
+            set(modeAtom, "normal");
+            resetCommand();
           }
           break;
 
         case "Backspace":
           if (mode === "command") {
-            setCommand(command.slice(0, -1));
+            updateCommand({ backspace: true });
             if (command.length === 1) {
-              setMode("normal");
+              set(modeAtom, "normal");
             }
           }
           break;
 
         default:
           if (mode === "command") {
-            setCommand(commandRef.current + event.key);
+            updateCommand(key);
           } else {
-            setKeys(tryNextKey(event.key));
+            updateShortcuts(key);
           }
       }
+    })
+  );
+
+  useEffect(() => {
+    if (initialized) return;
+
+    addEventListener("keypress", (event) => {
+      updateMode(event.key);
     });
 
     initialized = true;

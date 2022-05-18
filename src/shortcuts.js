@@ -1,4 +1,6 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { atom } from "jotai";
+import { useAtomCallback } from "jotai/utils";
 
 class ShortcutNode {
   constructor(key = null) {
@@ -11,46 +13,49 @@ class ShortcutNode {
 const shortcuts = new ShortcutNode();
 const TIMEOUT = 500;
 let curNode = shortcuts;
-let curKeys = "";
+export const keysAtom = atom("");
 let timer = null;
 
-function resetState() {
+function resetState(set) {
   clearTimeout(timer);
-  curKeys = "";
+  set(keysAtom, "");
   curNode = shortcuts;
   timer = null;
 }
 
-function startTimer() {
+function startTimer(get, set) {
   timer = setTimeout(() => {
-    console.error("Wrong shortcut:", curKeys);
-    resetState();
+    const keys = get(keysAtom);
+    if (keys) {
+      console.error("Wrong shortcut:", keys);
+    }
+      resetState(set);
   }, TIMEOUT);
 }
 
-export function tryNextKey(key) {
-  curKeys += key;
-  console.log(curKeys, key)
-  let keyNode = curNode.keys.get(key);
+export function useUpdateShortcuts() {
+  return useAtomCallback(
+    useCallback((get, set, key) => {
+      set(keysAtom, (keys) => keys + key);
+      console.log(get(keysAtom), key);
+      let keyNode = curNode.keys.get(key);
 
-  if (keyNode == undefined || keyNode.key !== key) {
-    console.error("Wrong shortcut:", curKeys);
-    let oldKeys = curKeys;
-    resetState();
-    return oldKeys;
-  }
+      if (keyNode == undefined || keyNode.key !== key) {
+        console.error("Wrong shortcut:", get(keysAtom));
+        resetState(set);
+        return;
+      }
 
-  if (keyNode.callback) {
-    keyNode.callback();
-    let oldKeys = curKeys;
-    resetState();
-    return oldKeys;
-  }
+      if (keyNode.callback) {
+        keyNode.callback();
+        resetState(set);
+      }
 
-  curNode = curNode.keys.get(key);
-  if (timer) clearTimeout(timer);
-  startTimer();
-  return curKeys;
+      curNode = curNode.keys.get(key);
+      if (timer) clearTimeout(timer);
+      startTimer(get, set);
+    })
+  );
 }
 
 function addShortcut(keys, callback) {
@@ -63,10 +68,9 @@ function addShortcut(keys, callback) {
 
       if (i === keys.length - 1) {
         // console.log("resetting callback");
-        node.callback = callback
+        node.callback = callback;
       }
-    } 
-    else {
+    } else {
       // console.log("creating node");
       let newNode = new ShortcutNode(k);
       if (i === keys.length - 1) {
@@ -81,7 +85,9 @@ function addShortcut(keys, callback) {
 
 export function useShortcut(keys, callback) {
   useEffect(() => {
-    addShortcut(keys, callback);
+    if (keys !== undefined) {
+      addShortcut(keys, callback);
+    }
     // TODO: remove shortcut
   }, [keys, callback]);
 }
