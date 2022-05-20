@@ -40,7 +40,7 @@ export function useUpdateShortcuts() {
       console.log(get(keysAtom), key);
       let keyNode = curNode.keys.get(key);
 
-      if (keyNode == undefined || keyNode.key !== key) {
+      if (keyNode === undefined || keyNode.key !== key) {
         console.error("Wrong shortcut:", get(keysAtom));
         resetState(set);
         return;
@@ -49,6 +49,7 @@ export function useUpdateShortcuts() {
       if (keyNode.callback) {
         keyNode.callback();
         resetState(set);
+        return;
       }
 
       curNode = curNode.keys.get(key);
