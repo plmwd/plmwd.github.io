@@ -10,7 +10,7 @@ export default function VimBar({ navs }) {
   });
 
   return (
-    <nav className="bg-dark-gunmetal h-full w-full text-sm font-mono">
+    <nav className="bg-gray-500 h-full w-full text-sm font-mono">
       <div className="flex sm:hidden items-center h-full">
         <button
           className="space-y-2 bg-independence rounded p-1"
@@ -22,12 +22,12 @@ export default function VimBar({ navs }) {
       <div
         className={`${
           open ? "flex" : "hidden"
-        } sm:flex flex-col sm:flex-row items-stretch mx-0 bg-gray-400 h-full w-full nav-items`}
+        } sm:flex flex-col sm:flex-row items-stretch mx-0 bg-gray-500 h-full w-full nav-items`}
       >
         {navs.map((n) => (
           <NavLink
             to={n.to}
-            className={`flex active:text-dark-gunmetal active:bg-pale-cerulean items-center px-3 mx-2 my-1.5 -skew-x-12 rounded-sm`}
+            className={`flex active:text-dark-gunmetal active:bg-pale-cerulean bg-gray-500 items-center px-3 mx-2 my-1.5 -skew-x-12 rounded-sm`}
             key={n.to}
           >
             <p className="skew-x-12">{n.name}</p>

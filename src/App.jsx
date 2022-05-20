@@ -68,14 +68,14 @@ function App() {
   useCommand("tabprev", prevTab);
 
   return (
-    <div className="h-screen w-screen bg-gray-200 flex flex-col">
-      <div className="h-12 flex flex-row bg-gray-400 items-stretch">
+    <div className="h-screen w-screen bg-gray-400 flex flex-col">
+      <div className="h-12 flex flex-row bg-gray-500 items-stretch">
         <div className="trapezoid w-5 bg-magenta-400 after:bg-magenta-400 rounded-sm after:rounded-sm mr-0 my-1 -left-1"></div>
         <div
-          className="flex items-center after:rounded-sm rounded-sm -skew-x-12 px-3 mr-2 my-2 bg-gray-300 ring-2 ring-magenta-500 ring-offset-2 ring-offset-gray-400 after:bg-gray-300 ml-2 hover:cursor-pointer hover:bg-magenta-400 hover:after:bg-magenta-400"
+          className="flex items-center after:rounded-sm rounded-sm -skew-x-12 px-3 mr-2 my-2 bg-gray-500 ring-2 ring-magenta-500 ring-offset-2 ring-offset-gray-500 after:bg-gray-500 ml-2 hover:cursor-pointer hover:bg-magenta-400 hover:after:bg-magenta-400"
           onClick={() => navigate("/")}
         >
-          <a className="font-mono pl-1 tracking-[0.3em] text-white-400 skew-x-12 font-black text-lg hover:text-gray-300">
+          <a className="font-mono pl-1 tracking-[0.3em] text-white-400 skew-x-12 font-black text-lg hover:text-gray-500">
             PW
           </a>
         </div>

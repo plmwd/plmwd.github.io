@@ -37,7 +37,7 @@ export function useUpdateShortcuts() {
   return useAtomCallback(
     useCallback((get, set, key) => {
       set(keysAtom, (keys) => keys + key);
-      console.log(get(keysAtom), key);
+      // console.log(get(keysAtom), key);
       let keyNode = curNode.keys.get(key);
 
       if (keyNode === undefined || keyNode.key !== key) {
@@ -63,7 +63,7 @@ function addShortcut(keys, callback) {
   let node = shortcuts;
   for (let i = 0; i < keys.length; i++) {
     let k = keys[i];
-    console.log(k, i);
+    // console.log(k, i);
     if (node.keys.has(k)) {
       node = node.keys.get(k);
 
@@ -80,7 +80,7 @@ function addShortcut(keys, callback) {
       node.keys.set(k, newNode);
       node = newNode;
     }
-    console.log(k, node);
+    // console.log(k, node);
   }
 }
 

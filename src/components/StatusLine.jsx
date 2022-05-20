@@ -31,7 +31,7 @@ export default function StatusLine() {
   )
 
   return (
-    <div className="h-full w-full bg-gray-400 flex flex-row font-mono text-sm">
+    <div className="h-full w-full bg-gray-500 flex flex-row font-mono text-sm">
     {Mode}
     {Git}
     </div>
