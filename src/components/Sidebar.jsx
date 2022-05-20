@@ -51,7 +51,7 @@ export default function Sidebar({ title, items }) {
   }, [items]);
 
   return (
-    <div className="flex container pt-1 h-full w-full flex-col bg-gray-500 font-mono text-sm pl-3">
+    <div className="flex container pt-1 h-full w-full flex-col bg-gray-500 font-mono text-sm pl-3 border-r-4 border-gray-200">
       {compiled.map((item, i) => (
         <div
           className={`flex flex-row items-center text-${item.color} fill-${
