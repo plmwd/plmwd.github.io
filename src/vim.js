@@ -53,6 +53,12 @@ export function useVim() {
           }
           break;
 
+        case "Tab":
+          if (mode === "command") {
+            updateCommand({ autocomplete: true })
+          }
+          break;
+
         default:
           if (mode === "command") {
             updateCommand(key);

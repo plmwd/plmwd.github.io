@@ -4,6 +4,7 @@ import { useCallback, useEffect } from "react";
 
 const commands = new Map();
 export const commandAtom = atom("");
+const showAutoCompleteAtom = atom(false);
 
 export function useCommand(newCommand, callback) {
   useEffect(() => {
@@ -35,6 +36,7 @@ export function useResetCommand() {
   return useAtomCallback(
     useCallback((_, set) => {
       set(commandAtom, "");
+      set(showAutoCompleteAtom, false);
     })
   );
 }
@@ -45,11 +47,24 @@ export function useUpdateCommand() {
       if (typeof keyOrOptions === "string") {
         set(commandAtom, (cmd) => cmd + keyOrOptions);
       } else {
-        const { backspace } = keyOrOptions;
+        const { backspace, autocomplete } = keyOrOptions;
         if (backspace) {
           set(commandAtom, (cmd) => cmd.slice(0, -1));
+          set(showAutoCompleteAtom, false);
+        } else if (autocomplete) {
+          set(showAutoCompleteAtom, true);
         }
       }
+    })
+  );
+}
+
+export function useAutoComplete() {
+  return useAtomCallback(
+    useCallback((get) => {
+      return get(showAutoCompleteAtom)
+        ? commands.map((cmd) => cmd.startsWith(get(keysAtom)))
+        : [];
     })
   );
 }
