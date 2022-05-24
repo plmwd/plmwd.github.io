@@ -41,9 +41,6 @@ const navs = [
 ];
 
 function App() {
-  const [items, setItems] = useState([]);
-  const [title, setTitle] = useState("");
-  console.log(useVim());
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -84,28 +81,21 @@ function App() {
         <div className="w-0.5 bg-magenta-400 rounded-sm my-1 -skew-x-12 mx-1"></div>
         <VimBar navs={navs} />
       </div>
-      <div className="flex flex-row h-full">
-        <div className="w-52">
-          <Sidebar title={title} items={items} />
-        </div>
-        <div className="flex-auto">
-          <Routes>
-            <Route
-              path="/*"
-              element={<About setTitle={setTitle} setItems={setItems} />}
-            />
-            <Route
-              path="/posts/*"
-              element={<Posts setTitle={setTitle} setItems={setItems} />}
-            />
-            <Route
-              path="/projects/*"
-              element={<Projects setTitle={setTitle} setItems={setItems} />}
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        <Route
+          path="/*"
+          element={<About />}
+        />
+        <Route
+          path="/posts/*"
+          element={<Posts />}
+        />
+        <Route
+          path="/projects/*"
+          element={<Projects />}
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <div className="h-5">
         <StatusLine />
       </div>
