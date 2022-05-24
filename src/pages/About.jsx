@@ -1,15 +1,11 @@
-import { useState } from "react";
+import {
+    IoAlbums,
+    IoConstruct, IoInformation, IoPhonePortrait, IoRocket
+} from "react-icons/io5";
 import Hero from "../components/Hero";
 import Section from "../components/Section";
 import Sidebar from "../components/Sidebar";
-import { useShortcut } from "../shortcuts";
-import {
-  IoInformation,
-  IoAlbums,
-  IoConstruct,
-  IoRocket,
-  IoPhonePortrait,
-} from "react-icons/io5";
+import { usePageNav } from "../hooks/nav";
 
 const sections = [
   {
@@ -44,10 +40,7 @@ const sections = [
 ];
 
 export default function About() {
-  const [line, setLine] = useState(0);
-
-  useShortcut("j", () => setLine(Math.min(line + 1, sections.length - 1)));
-  useShortcut("k", () => setLine(Math.max(line - 1, 0)));
+  const [line, setLine] = usePageNav(sections.length);
 
   return (
     <div className="flex flex-row h-full">

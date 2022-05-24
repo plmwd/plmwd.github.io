@@ -1,10 +1,10 @@
-import { useState } from "react";
 import Hero from "../components/Hero";
 import Section from "../components/Section";
 import Sidebar from "../components/Sidebar";
+import { usePageNav } from "../hooks/nav";
 
 export default function Projects() {
-  const [line, setLine] = useState(0);
+  const [line, setLine] = usePageNav(2);
 
   return (
     <div className="flex flex-row h-full">

@@ -1,4 +1,4 @@
-import { useVim } from "../vim";
+import { useVim } from "../hooks/vim";
 
 export default function CommandLine() {
   const { command, keys } = useVim();

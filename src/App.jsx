@@ -1,17 +1,15 @@
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
+import { useCommand } from "./hooks/commands";
 import CommandLine from "./components/CommandLine";
-import Sidebar from "./components/Sidebar";
 import StatusLine from "./components/StatusLine";
 import VimBar from "./components/VimBar";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Posts from "./pages/Posts";
 import Projects from "./pages/Projects";
-import { useShortcut } from "./shortcuts";
-import { useCommand } from "./commands";
-import { useVim } from "./vim";
+import { useShortcut } from "./hooks/shortcuts";
 
 const navs = [
   // {

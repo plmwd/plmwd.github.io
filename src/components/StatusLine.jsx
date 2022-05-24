@@ -1,4 +1,4 @@
-import { useVim } from "../vim";
+import { useVim } from "../hooks/vim";
 import { FaCodeBranch } from "react-icons/fa";
 
 const modeColors = {
