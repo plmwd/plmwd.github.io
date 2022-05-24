@@ -7,7 +7,7 @@ const levelMap = {
   1: "ml-3",
 };
 
-export default function Sidebar({ title, items }) {
+export default function Sidebar({ title, items, icons }) {
   const navigate = useNavigate();
   let compiled = useMemo(() => {
     let compiled = [{
@@ -23,7 +23,7 @@ export default function Sidebar({ title, items }) {
           level: 0,
           name: item.name || "null",
           href: null,
-          icon: <VscFolder />,
+          icon: (Array.isArray(icons) && icons[0]) || item.icon || <VscFolder />,
           color: "blue-300",
         });
 
@@ -32,7 +32,7 @@ export default function Sidebar({ title, items }) {
             level: 1,
             name: subItem.name || subItem,
             href: subItem.href || `#${item.name}-${subItem.name || subItem}`,
-            icon: subItem.icon || <VscFile />,
+            icon: (Array.isArray(icons) && icons[1]) || subItem.icon || <VscFile />,
             color: subItem.color || "white-400",
           });
         });
@@ -41,7 +41,7 @@ export default function Sidebar({ title, items }) {
           level: 0,
           name: item.name || item,
           href: item.href || `#${item.name || item}`,
-          icon: item.icon || <VscFile />,
+          icon: (Array.isArray(icons) && icons[0]) || item.icon || <VscFile />,
           color: item.color || "white-400",
         });
       }
@@ -51,7 +51,7 @@ export default function Sidebar({ title, items }) {
   }, [items]);
 
   return (
-    <div className="flex container pt-1 h-full w-full flex-col bg-gray-500 font-mono text-sm pl-3 border-r-4 border-gray-200">
+    <div className="flex container pt-1 h-full w-52 flex-col bg-gray-500 font-mono text-sm pl-3 border-r-4 border-gray-200">
       {compiled.map((item, i) => (
         <div
           className={`flex flex-row items-center text-${item.color} fill-${
