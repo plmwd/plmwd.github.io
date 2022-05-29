@@ -1,5 +1,11 @@
 import { useCallback } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "./App.css";
 import { useCommand } from "./hooks/commands";
 import CommandLine from "./components/CommandLine";
@@ -9,16 +15,19 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Posts from "./pages/Posts";
 import Projects from "./pages/Projects";
+import Home from "./pages/Home";
 import { useShortcut } from "./hooks/shortcuts";
+import { IoLogoGithub } from "react-icons/io";
 
 const navs = [
-  // {
-  //   name: "PW",
-  //   to: "/",
-  // },
+  {
+    name: "PW",
+    to: "/",
+    ignore: true,
+  },
   {
     name: "About",
-    to: "/",
+    to: "/about",
   },
   // {
   //   name: "Experience",
@@ -37,6 +46,29 @@ const navs = [
   //   to: "contact",
   // },
 ];
+
+const HeaderStart = () => (
+  <div className="trapezoid w-5 bg-magenta-400 after:bg-magenta-400 rounded-sm after:rounded-sm mr-0 my-1 -left-1"></div>
+);
+
+const HomeButton = () => (
+  <NavLink
+    className="flex home-button items-center rounded-sm -skew-x-12 px-3 mr-2 my-2 ring-2 ring-magenta-500 ring-offset-2 ring-offset-gray-500 ml-2 hover:cursor-pointer hover:bg-magenta-400 hover:after:bg-magenta-400"
+    to="/"
+  >
+    <p className="font-mono pl-1 tracking-[0.3em] skew-x-12 font-black text-lg hover:text-gray-500">
+      PW
+    </p>
+  </NavLink>
+);
+
+const Grill = () => (
+  <>
+    <div className="w-1 bg-magenta-400 rounded-sm my-1 -skew-x-12 mx-0"></div>
+    <div className="w-0.5 bg-magenta-400 rounded-sm my-1 -skew-x-12 ml-1"></div>
+    <div className="w-0.5 bg-magenta-400 rounded-sm my-1 -skew-x-12 mx-1"></div>
+  </>
+);
 
 function App() {
   const navigate = useNavigate();
@@ -64,34 +96,22 @@ function App() {
 
   return (
     <div className="h-screen w-screen bg-gray-400 flex flex-col">
-      <div className="h-12 flex flex-row bg-gray-500 items-stretch">
-        <div className="trapezoid w-5 bg-magenta-400 after:bg-magenta-400 rounded-sm after:rounded-sm mr-0 my-1 -left-1"></div>
-        <div
-          className="flex items-center after:rounded-sm rounded-sm -skew-x-12 px-3 mr-2 my-2 bg-gray-500 ring-2 ring-magenta-500 ring-offset-2 ring-offset-gray-500 after:bg-gray-500 ml-2 hover:cursor-pointer hover:bg-magenta-400 hover:after:bg-magenta-400"
-          onClick={() => navigate("/")}
-        >
-          <a className="font-mono pl-1 tracking-[0.3em] text-white-400 skew-x-12 font-black text-lg hover:text-gray-500">
-            PW
-          </a>
+      <div className="flex flex-row justify-between bg-gray-500">
+        <div className="h-12 flex flex-row bg-gray-500 items-stretch">
+          <HeaderStart />
+          <HomeButton />
+          <Grill />
+          <VimBar navs={navs} />
         </div>
-        <div className="w-1 bg-magenta-400 rounded-sm my-1 -skew-x-12 mx-0"></div>
-        <div className="w-0.5 bg-magenta-400 rounded-sm my-1 -skew-x-12 ml-1"></div>
-        <div className="w-0.5 bg-magenta-400 rounded-sm my-1 -skew-x-12 mx-1"></div>
-        <VimBar navs={navs} />
+        <a className="flex items-center mx-4 text-white-400" href="https://github.com/plmwd">
+          <IoLogoGithub size={24} />  
+        </a>
       </div>
       <Routes>
-        <Route
-          path="/*"
-          element={<About />}
-        />
-        <Route
-          path="/posts/*"
-          element={<Posts />}
-        />
-        <Route
-          path="/projects/*"
-          element={<Projects />}
-        />
+        <Route path="*" element={<Home />} />
+        <Route path="/about/*" element={<About />} />
+        <Route path="/posts/*" element={<Posts />} />
+        <Route path="/projects/*" element={<Projects />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <div className="h-5">

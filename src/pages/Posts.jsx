@@ -1,4 +1,3 @@
-import Hero from "../components/Hero";
 import Section from "../components/Section";
 import Sidebar from "../components/Sidebar";
 import { usePageNav } from "../hooks/nav";
@@ -7,14 +6,13 @@ export default function Posts() {
   const [line, setLine] = usePageNav(2);
 
   return (
-    <div className="flex flex-row h-full">
+    <div className="page">
       <Sidebar
         title="~/blog/"
         items={["one", "two", { items: ["four", "five"], name: "three" }]}
       />
-      <div className="flex-auto">
+      <div className="page-content">
         <div className="text-white-400">
-          <Hero title="Paul Wood" description="hi" />
           <Section
             title="Test"
             selected={line === 0}

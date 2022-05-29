@@ -1,38 +1,48 @@
 import {
-    IoAlbums,
-    IoConstruct, IoInformation, IoPhonePortrait, IoRocket
+  IoAlbums,
+  IoConstruct,
+  IoInformation,
+  IoPhonePortrait,
+  IoRocket,
 } from "react-icons/io5";
-import Hero from "../components/Hero";
-import Section from "../components/Section";
 import Sidebar from "../components/Sidebar";
-import { usePageNav } from "../hooks/nav";
+import Sections from "../components/Sections";
 
 const sections = [
   {
-    title: "About",
+    name: "About",
+    href: "about",
     icon: <IoInformation />,
-    body: <></>,
+    body: <p>
+      I am a full-stack IoT engineer. I graduated from the University of Central Florida with a 
+      Bachelor of Computer Engineering (BSCpE) in May of 2022. I enjoy working on device firmware
+      and backend software stacks.
+    </p>,
   },
   {
-    title: "Experience",
+    name: "Experience",
+    href: "experience",
     icon: <IoAlbums />,
     color: "yellow-400",
     body: <></>,
   },
   {
-    title: "Skills",
+    name: "Skills",
+    href: "skills",
     icon: <IoConstruct />,
     color: "cyan-400",
     body: <></>,
   },
   {
-    title: "Highlighted Projects",
+    name: "Highlighted Projects",
+    href: "highlighed-projects",
     icon: <IoRocket />,
     color: "red-400",
     body: <></>,
   },
   {
-    title: "Contact",
+    name: "Contact",
+    href: "contact",
     icon: <IoPhonePortrait />,
     color: "magenta-400",
     body: <></>,
@@ -40,28 +50,17 @@ const sections = [
 ];
 
 export default function About() {
-  const [line, setLine] = usePageNav(sections.length);
 
+  console.log('about')
   return (
-    <div className="flex flex-row h-full">
+    <div className="page">
       <Sidebar
         title="~/About.md"
-        items={sections.map(sec => ({ name: sec.title, icon: sec.icon, color: sec.color }))}
+        items={sections}
       />
-      <div className="flex-auto text-white-400">
-        <Hero title="Paul Wood" description="Full-stack IoT developer" />
-        {sections.map((sec, i) => (
-          <Section
-            title={sec.title}
-            selected={line === i}
-            onClick={() => setLine(i)}
-            number={i}
-            key={i}
-          >
-            {sec.body}
-          </Section>
-        ))}
-      </div>
+      <div className="page-content">
+        <Sections sections={sections} />
     </div>
+      </div>
   );
 }

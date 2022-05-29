@@ -35,7 +35,7 @@ export default function Sidebar({ title, items, icons }) {
           compiled.push({
             level: 1,
             name: subItem.name || subItem,
-            href: subItem.href || `#${item.name}-${subItem.name || subItem}`,
+            href: `#${subItem.href}` || `#${item.name}-${subItem.name || subItem}`,
             icon: (Array.isArray(icons) && icons[1]) || subItem.icon || (
               <VscFile />
             ),
@@ -46,7 +46,7 @@ export default function Sidebar({ title, items, icons }) {
         compiled.push({
           level: 0,
           name: item.name || item,
-          href: item.href || `#${item.name || item}`,
+          href: `#${item.href}` || `#${item.name || item}`,
           icon: (Array.isArray(icons) && icons[0]) || item.icon || <VscFile />,
           color: item.color || "white-400",
         });

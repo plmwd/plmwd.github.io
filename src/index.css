@@ -16,6 +16,11 @@ code {
     monospace;
 }
 
+@layer utilities {
+  .page { @apply flex flex-row h-full }
+  .page-content { @apply flex-auto text-white-400 }
+}
+
 .nav-items {}
 @layer utilities {
   .nav-items .active {
@@ -23,6 +28,15 @@ code {
   }
   .nav-items > a {
     @apply bg-gray-300 text-lavendar
+  }
+}
+
+@layer utilities {
+  .home-button {
+    @apply bg-gray-500 text-white-400 
+}
+  .home-button.active {
+    @apply bg-magenta-400 text-gray-500
   }
 }
 

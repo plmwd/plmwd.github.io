@@ -1,16 +1,9 @@
-import { useEffect } from "react"
+import Hero from "../components/Hero";
 
-export default function Home({ setItems }) {
-
-  useEffect(() => {
-    setItems([
-      { name: "one", href: "about" },
-      "two",
-      { items: ["four", "five"], name: "three" },
-    ])
-  }, [])
-
+export default function Home() {
   return (
-    <p>Home</p>
-  )
+    <div className="page page-content">
+      <Hero title="Paul Wood" description="Full-stack Embedded IoT developer" image="/images/me.jpeg"/>
+    </div>
+  );
 }
