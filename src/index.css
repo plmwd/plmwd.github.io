@@ -25,7 +25,7 @@ code {
 
 @layer utilities {
   .page { @apply flex flex-row h-full }
-  .page-content { @apply flex-auto text-white-400 }
+  .page-content { @apply flex-auto text-white-400 px-6 sm:px-20 }
 }
 
 .nav-items {}

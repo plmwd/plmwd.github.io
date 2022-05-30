@@ -104,7 +104,7 @@ function App() {
           <IoLogoGithub size={24} />
         </a>
       </div>
-      <div className="max-h-screen overflow-y-auto overflow-x-hidden h-full">
+      <div className="max-h-screen overflow-auto  h-full">
         <Routes>
           <Route path="/*" element={<About />} />
           <Route path="/posts/*" element={<Posts />} />
