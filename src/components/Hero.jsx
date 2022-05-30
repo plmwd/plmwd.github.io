@@ -6,7 +6,7 @@ export default function Hero({ title, description, image }) {
         <p className="text-2xl font-mono text-center">{description}</p>
       </div>
       <div className="flex self-center">
-        <img src={image} className="scale-75 shadow-2xl"/>
+        <img src={image} className="sm:scale-75 w-32 h-auto shadow-2xl"/>
       </div>
     </div>
   );

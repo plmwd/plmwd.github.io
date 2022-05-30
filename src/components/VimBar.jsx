@@ -10,19 +10,10 @@ export default function VimBar({ navs }) {
   });
 
   return (
-    <nav className="bg-gray-500 h-full w-full text-sm font-mono">
-      <div className="flex sm:hidden items-center h-full">
-        <button
-          className="space-y-2 bg-independence rounded p-1"
-          onClick={handleMenuClick}
-        >
-          <VscCode className="text-lavendar" />
-        </button>
-      </div>
+    <nav className="hidden sm:flex bg-gray-500 h-full w-full text-sm font-mono">
       <div
-        className={`${
-          open ? "flex" : "hidden"
-        } sm:flex flex-col sm:flex-row items-stretch mx-0 bg-gray-500 h-full w-full nav-items`}
+        className={`
+         sm:flex flex-col sm:flex-row items-stretch mx-0 bg-gray-500 h-full w-full nav-items`}
       >
         {navs.filter(n => !n.ignore).map((n) => (
           <NavLink
