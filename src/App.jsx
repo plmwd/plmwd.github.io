@@ -64,6 +64,34 @@ const Grill = () => (
   </>
 );
 
+const Header = () => (
+  <header className="flex flex-row justify-between bg-gray-500">
+    <div className="h-12 flex flex-row bg-gray-500 items-stretch">
+      <HeaderStart />
+      <PW />
+      <Grill />
+      <VimBar navs={navs} />
+    </div>
+    <a
+      className="flex items-center mx-4 text-white-400"
+      href="https://github.com/plmwd"
+    >
+      <IoLogoGithub size={24} />
+    </a>
+  </header>
+);
+
+const Footer = () => (
+  <footer className="flex-shrink-0">
+    <div className="h-6">
+      <StatusLine />
+    </div>
+    <div className="h-6">
+      <CommandLine />
+    </div>
+  </footer>
+);
+
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -90,20 +118,7 @@ function App() {
 
   return (
     <div className="h-screen w-screen bg-gray-400 flex flex-col">
-      <div className="flex flex-row justify-between bg-gray-500">
-        <div className="h-12 flex flex-row bg-gray-500 items-stretch">
-          <HeaderStart />
-          <PW />
-          <Grill />
-          <VimBar navs={navs} />
-        </div>
-        <a
-          className="flex items-center mx-4 text-white-400"
-          href="https://github.com/plmwd"
-        >
-          <IoLogoGithub size={24} />
-        </a>
-      </div>
+      <Header />
       <div className="max-h-screen overflow-auto  h-full">
         <Routes>
           <Route path="/*" element={<About />} />
@@ -112,12 +127,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
-      <div className="h-6">
-        <StatusLine />
-      </div>
-      <div className="h-6">
-        <CommandLine />
-      </div>
+      <Footer />
     </div>
   );
 }

@@ -5,62 +5,69 @@
 html {
   width: 100%;
   height: 100%;
+  height: -webkit-fill-available;
 }
 
 body {
   width: 100%;
   height: 100%;
+  height: -webkit-fill-available;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
 @layer utilities {
-  .page { @apply flex flex-row h-full }
-  .page-content { @apply flex-auto text-white-400 px-6 sm:px-20 }
+  .page {
+    @apply flex flex-row h-full;
+  }
+  .page-content {
+    @apply flex-auto text-white-400 px-6 sm:px-20;
+  }
 }
 
-.nav-items {}
+.nav-items {
+}
 @layer utilities {
   .nav-items .active {
-    @apply bg-pale-cerulean text-dark-gunmetal font-bold tracking-tighter
+    @apply bg-pale-cerulean text-dark-gunmetal font-bold tracking-tighter;
   }
   .nav-items > a {
-    @apply bg-gray-300 text-lavendar
+    @apply bg-gray-300 text-lavendar;
   }
 }
 
 @layer utilities {
   .home-button {
-    @apply bg-gray-500 text-white-400 
-}
+    @apply bg-gray-500 text-white-400;
+  }
   .home-button.active {
-    @apply bg-magenta-400 text-gray-500
+    @apply bg-magenta-400 text-gray-500;
   }
 }
 
 .trapezoid {
-    position: relative;
-    z-index: 1
+  position: relative;
+  z-index: 1;
 }
 .trapezoid::after {
-    content: " ";
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    /* background: #FF0000; */
-    transform-origin: bottom left;
-    transform: skew(-12deg, 0deg);
+  content: " ";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* background: #FF0000; */
+  transform-origin: bottom left;
+  transform: skew(-12deg, 0deg);
 }
