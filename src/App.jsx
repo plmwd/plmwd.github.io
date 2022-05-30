@@ -6,7 +6,6 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import "./App.css";
 import { useCommand } from "./hooks/commands";
 import CommandLine from "./components/CommandLine";
 import StatusLine from "./components/StatusLine";
@@ -21,13 +20,8 @@ import { IoLogoGithub } from "react-icons/io";
 
 const navs = [
   {
-    name: "PW",
-    to: "/",
-    ignore: true,
-  },
-  {
     name: "About",
-    to: "/about",
+    to: "/",
   },
   // {
   //   name: "Experience",
@@ -51,9 +45,9 @@ const HeaderStart = () => (
   <div className="trapezoid w-5 bg-magenta-400 after:bg-magenta-400 rounded-sm after:rounded-sm mr-0 my-1 -left-1"></div>
 );
 
-const HomeButton = () => (
+const PW = () => (
   <NavLink
-    className="flex home-button items-center rounded-sm -skew-x-12 px-3 mr-2 my-2 ring-2 ring-magenta-500 ring-offset-2 ring-offset-gray-500 ml-2 hover:cursor-pointer hover:bg-magenta-400 hover:after:bg-magenta-400"
+    className="flex items-center rounded-sm -skew-x-12 px-3 mr-2 my-2 ring-2 ring-magenta-500 ring-offset-2 ring-offset-gray-500 ml-2 hover:cursor-pointer hover:bg-magenta-400 hover:after:bg-magenta-400 bg-magenta-400"
     to="/"
   >
     <p className="font-mono pl-1 tracking-[0.3em] skew-x-12 font-black text-lg hover:text-gray-500">
@@ -99,25 +93,29 @@ function App() {
       <div className="flex flex-row justify-between bg-gray-500">
         <div className="h-12 flex flex-row bg-gray-500 items-stretch">
           <HeaderStart />
-          <HomeButton />
+          <PW />
           <Grill />
           <VimBar navs={navs} />
         </div>
-        <a className="flex items-center mx-4 text-white-400" href="https://github.com/plmwd">
-          <IoLogoGithub size={24} />  
+        <a
+          className="flex items-center mx-4 text-white-400"
+          href="https://github.com/plmwd"
+        >
+          <IoLogoGithub size={24} />
         </a>
       </div>
-      <Routes>
-        <Route path="*" element={<Home />} />
-        <Route path="/about/*" element={<About />} />
-        <Route path="/posts/*" element={<Posts />} />
-        <Route path="/projects/*" element={<Projects />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <div className="h-5">
+      <div className="max-h-screen overflow-y-auto overflow-x-hidden h-full">
+        <Routes>
+          <Route path="/*" element={<About />} />
+          <Route path="/posts/*" element={<Posts />} />
+          <Route path="/projects/*" element={<Projects />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+      <div className="h-6">
         <StatusLine />
       </div>
-      <div className="h-5">
+      <div className="h-6">
         <CommandLine />
       </div>
     </div>

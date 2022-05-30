@@ -5,8 +5,8 @@ import {
   IoPhonePortrait,
   IoRocket,
 } from "react-icons/io5";
-import Sidebar from "../components/Sidebar";
 import Sections from "../components/Sections";
+import Hero from "../components/Hero";;
 
 const sections = [
   {
@@ -54,11 +54,8 @@ export default function About() {
   console.log('about')
   return (
     <div className="page">
-      <Sidebar
-        title="~/About.md"
-        items={sections}
-      />
       <div className="page-content">
+      <Hero title="Paul Wood" description="Full-stack Embedded IoT developer" image="/images/me.jpeg"/>
         <Sections sections={sections} />
     </div>
       </div>
