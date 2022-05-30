@@ -82,7 +82,7 @@ const Header = () => (
 );
 
 const Footer = () => (
-  <footer className="flex-shrink-0">
+  <footer className="hidden sm:flex">
     <div className="h-6">
       <StatusLine />
     </div>
