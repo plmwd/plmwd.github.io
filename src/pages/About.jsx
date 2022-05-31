@@ -111,6 +111,13 @@ const sections = [
     ),
   },
   {
+    name: "Highlighted Projects",
+    href: "highlighed-projects",
+    icon: <IoRocket />,
+    color: "red-400",
+    body: <></>,
+  },
+  {
     name: "Experience",
     href: "experience",
     icon: <IoAlbums />,
@@ -128,13 +135,6 @@ const sections = [
         ))}
       </div>
     ),
-  },
-  {
-    name: "Highlighted Projects",
-    href: "highlighed-projects",
-    icon: <IoRocket />,
-    color: "red-400",
-    body: <></>,
   },
   {
     name: "Contact",
