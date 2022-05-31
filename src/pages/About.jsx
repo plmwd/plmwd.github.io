@@ -75,12 +75,18 @@ const ExperiencePanel = ({ title, employer, from, to, work }) => (
 
 const ContactIcon = ({ type, href }) => {
   const size = 32;
-  const classes = "mx-2";
+  const classes = "mx-2 cursor-pointer";
 
-  return {
-    github: <IoLogoGithub className={classes} size={size} href={href} />,
-    email: <IoMail className={classes} size={size} href={href} />,
-  }[type];
+  return (
+    <a href={href}>
+      {
+        {
+          github: <IoLogoGithub className={classes} size={size}  />,
+          email: <IoMail className={classes} size={size}  />,
+        }[type]
+      }
+    </a>
+  );
 };
 
 const sections = [
