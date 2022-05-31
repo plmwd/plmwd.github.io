@@ -65,7 +65,7 @@ const Grill = () => (
 );
 
 const Header = () => (
-  <header className="flex flex-row justify-between bg-gray-500">
+  <header className="flex flex-row w-full justify-between bg-gray-500">
     <div className="h-12 flex flex-row bg-gray-500 items-stretch">
       <HeaderStart />
       <PW />
@@ -82,7 +82,7 @@ const Header = () => (
 );
 
 const Footer = () => (
-  <footer className="hidden sm:flex">
+  <footer className="w-full">
     <div className="h-6">
       <StatusLine />
     </div>
@@ -117,16 +117,16 @@ function App() {
   useCommand("tabprev", prevTab);
 
   return (
-    <div className="h-screen w-screen bg-gray-400 flex flex-col">
+    <div className="h-screen overflow-hidden bg-gray-400 flex flex-col">
       <Header />
-      <div className="max-h-screen overflow-auto  h-full">
+      <main className="overflow-y-scroll flex-1">
         <Routes>
           <Route path="/*" element={<About />} />
           <Route path="/posts/*" element={<Posts />} />
           <Route path="/projects/*" element={<Projects />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
+      </main>
       <Footer />
     </div>
   );
