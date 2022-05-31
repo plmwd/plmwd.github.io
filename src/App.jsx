@@ -117,7 +117,7 @@ function App() {
   useCommand("tabprev", prevTab);
 
   return (
-    <div className="h-screen overflow-hidden bg-gray-400 flex flex-col">
+    <div className="h-screen overflow-hidden bg-gray-400 flex flex-col min-h-full">
       <Header />
       <main className="overflow-y-scroll flex-1">
         <Routes>
